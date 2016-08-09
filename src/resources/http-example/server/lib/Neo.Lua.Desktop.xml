@@ -1,0 +1,366 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Neo.Lua.Desktop</name>
+    </assembly>
+    <members>
+        <member name="T:Neo.IronLua.LuaStackFrameType">
+            <summary></summary>
+        </member>
+        <member name="F:Neo.IronLua.LuaStackFrameType.Unknown">
+            <summary></summary>
+        </member>
+        <member name="F:Neo.IronLua.LuaStackFrameType.Clr">
+            <summary></summary>
+        </member>
+        <member name="F:Neo.IronLua.LuaStackFrameType.Lua">
+            <summary></summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaStackFrame">
+            <summary></summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaStackFrame.#ctor(System.Diagnostics.StackFrame,Neo.IronLua.ILuaDebugInfo)">
+            <summary></summary>
+            <param name="frame"></param>
+            <param name="info"></param>
+        </member>
+        <member name="M:Neo.IronLua.LuaStackFrame.ToString(System.Text.StringBuilder,System.Boolean)">
+            <summary></summary>
+            <param name="sb"></param>
+            <param name="printType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaStackFrame.ToString">
+            <summary></summary>
+            <returns></returns>
+        </member>
+        <member name="P:Neo.IronLua.LuaStackFrame.Type">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaStackFrame.MethodName">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaStackFrame.Method">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaStackFrame.ILOffset">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaStackFrame.NativeOffset">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaStackFrame.FileName">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaStackFrame.ColumnNumber">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaStackFrame.LineNumber">
+            <summary></summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaExceptionData">
+            <summary>Class to extent the any Exception with Lua debug information.</summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.#ctor(Neo.IronLua.LuaStackFrame[])">
+            <summary>Creates a exception data with a stack trace.</summary>
+            <param name="stackTrace"></param>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.IndexOf(Neo.IronLua.LuaStackFrame)">
+            <summary></summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.Contains(Neo.IronLua.LuaStackFrame)">
+            <summary></summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.CopyTo(Neo.IronLua.LuaStackFrame[],System.Int32)">
+            <summary></summary>
+            <param name="array"></param>
+            <param name="arrayIndex"></param>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.UpdateStackTrace(Neo.IronLua.LuaStackFrame[])">
+            <summary>Change the StackTrace</summary>
+            <param name="newStackTrace"></param>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.GetEnumerator">
+            <summary></summary>
+            <returns></returns>
+        </member>
+        <member name="P:Neo.IronLua.LuaExceptionData.Count">
+            <summary>Stackframes</summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaExceptionData.IsReadOnly">
+            <summary>Always <c>true</c></summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.GetStackTrace(System.Int32,System.Boolean)">
+            <summary></summary>
+            <param name="luaSkipFrames"></param>
+            <param name="skipClrFrames"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.FormatStackTrace(System.Int32,System.Boolean)">
+            <summary>Get StackTrace format as an string.</summary>
+            <param name="luaSkipFrames">Lua frame to skip.</param>
+            <param name="skipClrFrames">Skip all clr-frames.</param>
+            <returns>Formatted stackframe</returns>
+        </member>
+        <member name="P:Neo.IronLua.LuaExceptionData.Item(System.Int32)">
+            <summary></summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Neo.IronLua.LuaExceptionData.StackTrace">
+            <summary>Formatted StackTrace</summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.GetStackFrame(System.Diagnostics.StackFrame)">
+            <summary>Get the LuaStackFrame from a .net StackFrame, if someone exists. In the other case, the return LuaStackFrame is only proxy to the orginal frame.</summary>
+            <param name="frame">.net stackframe</param>
+            <returns>LuaStackFrame</returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.GetStackTrace(System.Diagnostics.StackTrace)">
+            <summary>Converts a whole StackTrace.</summary>
+            <param name="trace">.net stacktrace</param>
+            <returns>LuaStackFrames</returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.GetStackTrace(System.Collections.Generic.IEnumerable{System.Diagnostics.StackFrame},System.Func{System.Diagnostics.StackFrame,Neo.IronLua.LuaStackFrame})">
+            <summary>Converts a whole StackTrace and it is possible to use a special resolver.</summary>
+            <param name="trace">.net stacktrace</param>
+            <param name="resolveFrames"></param>
+            <returns>LuaStackFrames</returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaExceptionData.GetData(System.Exception,System.Boolean)">
+            <summary>Retrieves the debug information for an exception.</summary>
+            <param name="ex">Exception</param>
+            <param name="resolveStackTrace"></param>
+            <returns>Debug Information</returns>
+        </member>
+        <member name="T:Neo.IronLua.LuaLibraryPackage">
+            <summary></summary>
+        </member>
+        <member name="F:Neo.IronLua.LuaLibraryPackage.CurrentDirectoryPathVariable">
+            <summary></summary>
+        </member>
+        <member name="F:Neo.IronLua.LuaLibraryPackage.ExecutingDirectoryPathVariable">
+            <summary></summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaLibraryPackage.#ctor(Neo.IronLua.LuaGlobal)">
+            <summary></summary>
+            <param name="global"></param>
+        </member>
+        <member name="P:Neo.IronLua.LuaLibraryPackage.loaded">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaLibraryPackage.path">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaLibraryPackage.Path">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaLibraryPackage.CompileOptions">
+            <summary></summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaLibraryOS">
+            <summary></summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaLibraryOS.date(System.String,System.Object)">
+            <summary>Converts a number representing the date and time back to some higher-level representation.</summary>
+            <param name="format">Format string. Same format as the C <see href="http://www.cplusplus.com/reference/ctime/strftime/">strftime()</see> function.</param>
+            <param name="time">Numeric date-time. It defaults to the current date and time.</param>
+            <returns>Formatted date string, or table of time information.</returns>
+            <remarks>by PapyRef</remarks>
+        </member>
+        <member name="M:Neo.IronLua.LuaLibraryOS.time(Neo.IronLua.LuaTable)">
+            <summary>Calculate the current date and time, coded as a number. That number is the number of seconds since 
+            Epoch date, that is 00:00:00 UTC, January 1, 1970. When called with a table, it returns the number representing 
+            the date and time described by the table.</summary>
+            <param name="table">Table representing the date and time</param>
+            <returns>The time in system seconds. </returns>
+            <remarks>by PapyRef</remarks>
+        </member>
+        <member name="M:Neo.IronLua.LuaLibraryOS.datetime(System.Object)">
+            <summary>Converts a time to a .net DateTime</summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaLibraryOS.difftime(System.Object,System.Object)">
+            <summary>Calculate the number of seconds between time t1 to time t2.</summary>
+            <param name="t2">Higher bound of the time interval whose length is calculated.</param>
+            <param name="t1">Lower bound of the time interval whose length is calculated. If this describes a time point later than end, the result is negative.</param>
+            <returns>The number of seconds from time t1 to time t2. In other words, the result is t2 - t1.</returns>
+            <remarks>by PapyRef</remarks>
+        </member>
+        <member name="T:Neo.IronLua.LuaDeskop">
+            <summary>Extension for the desktop lua version.</summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaDeskop.AssemblyCacheList">
+            <summary></summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaDeskop.AssemblyCacheList.CacheItem">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaDeskop.AssemblyCacheList.AssemblyCount">
+            <summary>Number of loaded assemblies</summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaDeskop.CompileChunk(Neo.IronLua.Lua,System.String,Neo.IronLua.LuaCompileOptions,System.Collections.Generic.KeyValuePair{System.String,System.Type}[])">
+            <summary>Erzeugt ein Delegate aus dem Code, ohne ihn auszuführen.</summary>
+            <param name="lua"></param>
+            <param name="sFileName">Dateiname die gelesen werden soll.</param>
+            <param name="options">Options for the compile process.</param>
+            <param name="args">Parameter für den Codeblock</param>
+            <returns>Compiled chunk.</returns>
+        </member>
+        <member name="P:Neo.IronLua.LuaDeskop.LuaTypeResolver">
+            <summary>Desktop type resolver.</summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaDeskop.LookupReferencedAssemblies">
+            <summary>Should the type resolve also scan references assemblies.</summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaDeskop.StackTraceCompileOptions">
+            <summary></summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaFileStream">
+            <summary></summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaFileStream.OpenFile(System.String,System.String,System.Text.Encoding)">
+            <summary>Creates a new lua compatible file access.</summary>
+            <param name="fileName">Name of the file</param>
+            <param name="mode">mode</param>
+            <param name="encoding"></param>
+        </member>
+        <member name="T:Neo.IronLua.LuaFileProcess">
+            <summary></summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaFilePackage">
+            <summary>default files are not supported.</summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.open(System.String,System.String)">
+            <summary></summary>
+            <param name="filename"></param>
+            <param name="mode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.lines(System.Object[])">
+            <summary></summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.close(Neo.IronLua.LuaFile)">
+            <summary></summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.input(System.Object)">
+            <summary></summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.output(System.Object)">
+            <summary></summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.flush">
+            <summary></summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.read(System.Object[])">
+            <summary></summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.write(System.Object[])">
+            <summary></summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.tmpfile">
+            <summary></summary>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.tmpfilenew">
+            <summary></summary>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.type(System.Object)">
+            <summary></summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaFilePackage.popen(System.String,System.String)">
+            <summary></summary>
+            <param name="program"></param>
+            <param name="mode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Neo.IronLua.LuaFilePackage.DefaultEncoding">
+            <summary>Defines the encoding for stdout</summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaGlobal">
+            <summary></summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaGlobal.#ctor(Neo.IronLua.Lua)">
+            <summary>Create a new environment for the lua script manager.</summary>
+            <param name="lua"></param>
+        </member>
+        <member name="M:Neo.IronLua.LuaGlobal.DoChunk(System.String,System.Collections.Generic.KeyValuePair{System.String,System.Object}[])">
+            <summary>Compiles and execute the filename.</summary>
+            <param name="sFileName">Name of the lua file.</param>
+            <param name="args">Parameter definition for the file.</param>
+            <returns>Return values of the file.</returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaGlobal.OnPrint(System.String)">
+            <summary></summary>
+            <param name="sText"></param>
+        </member>
+        <member name="M:Neo.IronLua.LuaGlobal.LuaDoFile(System.Object[])">
+            <summary></summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Neo.IronLua.LuaGlobal.LuaLoadReturnClosure">
+            <summary></summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaGlobal.LuaLoad(System.Object,System.String,System.String,Neo.IronLua.LuaTable)">
+            <summary></summary>
+            <param name="ld"></param>
+            <param name="source"></param>
+            <param name="mode"></param>
+            <param name="env"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Neo.IronLua.LuaGlobal.LuaLoadFile(System.String,System.String,Neo.IronLua.LuaTable)">
+            <summary></summary>
+            <param name="filename"></param>
+            <param name="mode"></param>
+            <param name="env"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Neo.IronLua.LuaGlobal.LuaLibraryIO">
+            <summary></summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaGlobal.LuaPackage">
+            <summary></summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaStackTraceDebugger">
+            <summary>Debugger that creates the methods as dynamic assembly, with them
+            it is possible to retrieve exact stacktraces. This debugger is good if
+            you are running long scripts, they stay in memory.</summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaStackTraceDebugger.LuaDebugInfo">
+            <summary></summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaStackTraceDebugger.LuaDebugInfoGenerator">
+            <summary></summary>
+        </member>
+        <member name="T:Neo.IronLua.LuaStackTraceDebugger.ReduceDynamic">
+            <summary></summary>
+        </member>
+        <member name="M:Neo.IronLua.LuaStackTraceDebugger.#ctor">
+            <summary>Creates a new StackTrace-Debugger</summary>
+        </member>
+        <member name="P:Neo.IronLua.LuaStackTraceDebugger.Default">
+            <summary>Default debugger for the stack trace debugger.</summary>
+        </member>
+    </members>
+</doc>
