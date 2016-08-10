@@ -30,6 +30,8 @@ namespace FiveRebornHttp
                     }
                 }
 
+                httpRequestMessage.Content = new StringContent(data);
+
                 var response = httpClient.SendAsync(httpRequestMessage).Result;
                 var content = response.Content.ReadAsStringAsync().Result;
                 var statusCode = (int)response.StatusCode;
