@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
+using System.Text;
 using Neo.IronLua;
 
 namespace FiveRebornHttp
 {
     public class HttpHandler
     {
-        public static void MakeRequest(string url, Func<object, object, object, LuaResult> callback, string method = null, string data = null, LuaTable headers = null)
+        public static void MakeRequest(string url, Func<object, object, object, LuaResult> callback, string method = null, string data = null, LuaTable headers = null, string mediaType = null)
         {
+            var requestMethod = StringToHttpMethod(method);
+
             using (var httpClient = new HttpClient())
             {
-                var httpRequestMessage = new HttpRequestMessage(StringToHttpMethod(method), url);
+                var httpRequestMessage = new HttpRequestMessage(requestMethod, url);
 
                 if (headers != null)
                 {
@@ -19,18 +21,15 @@ namespace FiveRebornHttp
                     {
                         var key = header.Key.ToString();
                         var value = header.Value.ToString();
-
-                        if (key.ToLowerInvariant() == "content-type")
-                        {
-                            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(value));
-                            continue;
-                        }
-
-                        httpRequestMessage.Headers.Add(header.Key.ToString(), header.Value.ToString());
+                        
+                        httpRequestMessage.Headers.Add(key, value);
                     }
                 }
 
-                httpRequestMessage.Content = new StringContent(data);
+                if (!string.IsNullOrWhiteSpace(data))
+                {
+                    httpRequestMessage.Content = new StringContent(data, Encoding.UTF8, mediaType);
+                }
 
                 var response = httpClient.SendAsync(httpRequestMessage).Result;
                 var content = response.Content.ReadAsStringAsync().Result;

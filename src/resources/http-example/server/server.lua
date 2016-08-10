@@ -14,6 +14,7 @@ end
 local method = "get"
 local data = nil
 local headers = { }
+local mediaType = nil
 
 --[[
     == MakeRequest ==
@@ -25,6 +26,7 @@ local headers = { }
     method      | string    | yes       | Possible options: delete, head, options, post, put, trace
     data        | string    | yes       | You can use "json.encode(mytablevariable)" to turn a Lua table into JSON
     headers     | table     | yes       | Use this to send extra headers, like { ["Content-Type"] = "application/json" }
+    mediaType   | string    | yes       | For example: application/json
 ]]--
 -- Optional: method, data, headers
-fiveRebornHttp.MakeRequest(url, callback, method, data, headers)
+fiveRebornHttp.MakeRequest(url, callback, method, data, headers, mediaType)
